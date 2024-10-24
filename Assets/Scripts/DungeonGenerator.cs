@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    public DungeonData dungeonGenerationData;
-    private List<Vector2Int> roomsPositions;
+    public DungeonData DungeonGenerationData;
 
     void Start()
     {
         //Gera a lista de coordenadas das Salas a partir dos Crawlers
-        roomsPositions = DungeonCrawlerController.GeneratePositions(dungeonGenerationData);
+        List<Vector2Int> roomsPositions = DungeonCrawlerController.GeneratePositions(DungeonGenerationData);
         //Gera as Rooms
         SpawnRooms(roomsPositions);
     }
 
      private void SpawnRooms(List<Vector2Int> positions){
-        foreach(Vector2Int roomPositions in positions)
+       //Percorre cada posição gerando salas
+        foreach(Vector2Int roomPosition in positions)
         {
             //Gera a sala
-            RoomController.Instance.SpawnRoom(roomPositions);
+            RoomController.Instance.SpawnRoom(roomPosition);
         }
     }
 }
