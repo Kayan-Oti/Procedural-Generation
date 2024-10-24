@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class DungeonCrawler
 {
-    private Vector2Int Position { get; set;}
+    private Vector2Int _position;
 
-    public DungeonCrawler(Vector2Int startPosition)
+    public DungeonCrawler()
     {
-        Position = startPosition;
+        _position = Vector2Int.zero;
     }
 
-    public Vector2Int MoveToRandomDirection(Dictionary<Direction, Vector2Int> directionMovementMap)
+    //Dicionário que converte int em Vector2Int
+    public static readonly Dictionary<int, Vector2Int> directionMovementMap = new Dictionary<int, Vector2Int>
     {
-        Direction toMove = (Direction)Random.Range(0, directionMovementMap.Count);
-        Position += directionMovementMap[toMove];
-        return Position;
+        {0, Vector2Int.up},
+        {1, Vector2Int.left},
+        {2, Vector2Int.down},
+        {3, Vector2Int.right},
+    };
+
+    //Função que move o Crawler para uma direção aleatória
+    public Vector2Int MoveToRandomDirection()
+    {
+        //Gera um número aleatório correspondente a uma direção
+        int toMove = Random.Range(0, directionMovementMap.Count);
+        //Move o crawler na direção aleatória
+        _position += directionMovementMap[toMove];
+        //Retorna a posição
+        return _position;
     }
-    
 }
+
